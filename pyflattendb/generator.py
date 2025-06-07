@@ -698,13 +698,23 @@ class SchemaGenerator:
                 if field_iter.is_relationship and field_iter.is_list:
                     continue  # handled in second pass
                 if field_iter.is_relationship and not field_iter.is_list:
-                    # Add FK column for non-list relationships
+                    # Add FK column for non-list relationships (one-to-one)
                     fk_col = f"{field_iter.name}_id"
                     attrs[fk_col] = Column(
                         Integer,
                         ForeignKey(f"{field_iter.relationship_type}.id", ondelete="SET NULL"),
                         nullable=field_iter.nullable,
                     )
+                    # Add the relationship attribute that references the id column
+                    attrs[field_iter.name] = relationship(
+                        field_iter.relationship_type.capitalize(),
+                        foreign_keys=[attrs[fk_col]],
+                        back_populates=None,
+                        lazy="joined",
+                    )
+                    # Update the field info to reflect the actual column type
+                    field_iter.python_type = int
+                    field_iter.name = fk_col
                     continue
                 elif field_iter.is_reference_table:
                     attrs[field_iter.name] = Column(String, nullable=field_iter.nullable)
@@ -747,8 +757,8 @@ class SchemaGenerator:
                         field_iter.association_table_name or f"{type_name}_{field_iter.relationship_type}_association",
                         type_name,
                         field_iter.relationship_type,
-                        f"{type_name}_id",
-                        f"{field_iter.relationship_type}_id",
+                        f"{type_name}_id",  # This references the id column
+                        f"{field_iter.relationship_type}_id",  # This references the id column
                         Base.metadata,
                     )
 
@@ -792,17 +802,62 @@ class SchemaGenerator:
                         )
                 elif field_iter.is_list:
                     # One-to-many relationship
+                    # Add a foreign key column in the related table that references this table's id
+                    related_model = generated_models[field_iter.relationship_type]
+                    fk_col = f"{type_name}_id"
+                    if not hasattr(related_model, fk_col):
+                        setattr(
+                            related_model,
+                            fk_col,
+                            Column(Integer, ForeignKey(f"{type_name}.id", ondelete="SET NULL"), nullable=True),
+                        )
+                    # Add the relationship attribute that references the foreign key column
                     setattr(
                         model,
                         field_iter.name,
-                        relationship(field_iter.relationship_type.capitalize(), back_populates=None, lazy="joined"),
+                        relationship(
+                            field_iter.relationship_type.capitalize(),
+                            foreign_keys=[getattr(related_model, fk_col)],
+                            back_populates=None,
+                            lazy="joined",
+                        ),
                     )
+                    # Add reverse relationship
+                    reverse_name = self._singularize(type_name)
+                    if not hasattr(related_model, reverse_name):
+                        setattr(
+                            related_model,
+                            reverse_name,
+                            relationship(
+                                type_name.capitalize(),
+                                foreign_keys=[getattr(related_model, fk_col)],
+                                back_populates=None,
+                                lazy="joined",
+                            ),
+                        )
                 else:
-                    # Many-to-one relationship
+                    # Many-to-one relationship (this should not happen as it's handled in first pass)
+                    # But if it does, ensure it has a proper foreign key
+                    fk_col = f"{field_iter.name}_id"
+                    if not hasattr(model, fk_col):
+                        setattr(
+                            model,
+                            fk_col,
+                            Column(
+                                Integer,
+                                ForeignKey(f"{field_iter.relationship_type}.id", ondelete="SET NULL"),
+                                nullable=field_iter.nullable,
+                            ),
+                        )
                     setattr(
                         model,
                         field_iter.name,
-                        relationship(field_iter.relationship_type.capitalize(), back_populates=None, lazy="joined"),
+                        relationship(
+                            field_iter.relationship_type.capitalize(),
+                            foreign_keys=[getattr(model, fk_col)],
+                            back_populates=None,
+                            lazy="joined",
+                        ),
                     )
 
         # Add reference table models with proper primary keys and unique constraint

@@ -136,7 +136,8 @@ def main() -> None:
                     "choices": ["active", "inactive", "maintenance"],
                     "description": "Current store status",
                 },
-                "store.address": {"description": "Store's physical address"},
+                "store.address": {"description": "Store's physical address", "entity_type": "address"},
+                "order.shipping_address": {"description": "Order shipping address", "entity_type": "address"},
                 "product.status": {
                     "is_reference_table": True,
                     "choices": ["in_stock", "low_stock", "out_of_stock", "discontinued"],
