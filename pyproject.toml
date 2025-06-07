@@ -1,0 +1,48 @@
+[tool.black]
+line-length = 120
+target-version = ['py313']
+skip-string-normalization = false
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = [
+    "E203", # Black compatibility
+    "W503", # Black compatibility
+]
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+known_first_party = ["pyflattendb"]
+known_third_party = ["pytest"]
+
+[project]
+name = "pyflattendb"
+version = "0.1.0"
+description = "Takes a Python object and generates tables based on the data."
+authors = [
+    {name = "Me",email = "20753937+random-things@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "sqlalchemy>=2.0.0",
+    "pydantic>=2.0.0",
+    "typing-extensions>=4.0.0",
+    "rich>=13.0.0",  # For pretty console output
+]
+
+[tool.poetry]
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.2.0"
+pre-commit = "^4.2.0"
+pytest = "^8.4.0"
+isort = "^6.0.1"
+black = "^25.1.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
