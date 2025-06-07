@@ -9,7 +9,7 @@ A Python library that automatically generates SQLAlchemy and Pydantic models fro
 - **Relationship Management**: Support for one-to-one, one-to-many, and many-to-many relationships
 - **Reference Tables**: Create enumerated value tables for string fields
 - **Rich Metadata**: Fine-grained control over field properties and relationships
-- **Schema Visualization**: Beautiful console output for schema inspection
+- **Schema Visualization**: Pretty-ish console output for schema inspection
 - **Type Inference**: Smart detection of entity types and relationships
 - **Custom Validation**: Support for field constraints, patterns, and custom validators
 
@@ -187,10 +187,10 @@ Initializing SchemaGenerator...
 Analyzing data structure...
 
 Generating SQLAlchemy models...
-Generated 14 SQLAlchemy models
+Generated 13 SQLAlchemy models
 
 Generating Pydantic models...
-Generated 12 Pydantic models
+Generated 11 Pydantic models
 
 Schema Visualization:
                                                                   Schema Structure: address
@@ -215,14 +215,14 @@ Schema Visualization:
 │ role  │ str  │ False    │ False       │              │ False   │ False │       │ False        │                │ False  │             │                  │
 └───────┴──────┴──────────┴─────────────┴──────────────┴─────────┴───────┴───────┴──────────────┴────────────────┴────────┴─────────────┴──────────────────┘
 
-                                                                  Schema Structure: department
-┏━━━━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
-┃ Field   ┃ Type ┃ Nullable ┃ Primary Key ┃ Relationship ┃ Is List ┃ Is FK ┃ FK To   ┃ Is Ref Table ┃ Ref Table Name ┃ Is M2M ┃ Assoc Table ┃ Metadata         ┃
-┡━━━━━━━━━╇━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
-│ id      │ int  │ False    │ True        │              │ False   │ False │         │ False        │                │ False  │             │ primary_key=True │
-│ name    │ str  │ False    │ False       │              │ False   │ False │         │ False        │                │ False  │             │                  │
-│ manager │ dict │ False    │ False       │ manager      │ False   │ True  │ manager │ False        │                │ False  │             │                  │
-└─────────┴──────┴──────────┴─────────────┴──────────────┴─────────┴───────┴─────────┴──────────────┴────────────────┴────────┴─────────────┴──────────────────┘
+                                                                   Schema Structure: department
+┏━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃ Field      ┃ Type ┃ Nullable ┃ Primary Key ┃ Relationship ┃ Is List ┃ Is FK ┃ FK To   ┃ Is Ref Table ┃ Ref Table Name ┃ Is M2M ┃ Assoc Table ┃ Metadata         ┃
+┡━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ id         │ int  │ False    │ True        │              │ False   │ False │         │ False        │                │ False  │             │ primary_key=True │
+│ name       │ str  │ False    │ False       │              │ False   │ False │         │ False        │                │ False  │             │                  │
+│ manager_id │ int  │ False    │ False       │ manager      │ False   │ True  │ manager │ False        │                │ False  │             │                  │
+└────────────┴──────┴──────────┴─────────────┴──────────────┴─────────┴───────┴─────────┴──────────────┴────────────────┴────────┴─────────────┴──────────────────┘
 
                                                                  Schema Structure: category
 ┏━━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
@@ -243,22 +243,22 @@ Schema Visualization:
 └──────────┴──────┴──────────┴─────────────┴──────────────┴─────────┴───────┴───────┴──────────────┴────────────────┴────────┴─────────────┴──────────────────┘
 
                                                                                                 Schema Structure: product
-┏━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Field          ┃ Type  ┃ Nullable ┃ Primary Key ┃ Relationship   ┃ Is List ┃ Is FK ┃ FK To          ┃ Is Ref Table ┃ Ref Table Name ┃ Is M2M ┃ Assoc Table                  ┃ Metadata                                ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ id             │ int   │ False    │ True        │                │ False   │ False │                │ False        │                │ False  │                              │ primary_key=True                        │
-│ name           │ str   │ False    │ False       │                │ False   │ False │                │ False        │                │ False  │                              │                                         │
-│ sku            │ str   │ False    │ False       │                │ False   │ False │                │ False        │                │ False  │                              │                                         │
-│ price          │ float │ False    │ False       │                │ False   │ False │                │ False        │                │ False  │                              │                                         │
-│ status         │ str   │ False    │ False       │                │ False   │ False │                │ True         │ status_ref     │ False  │                              │ is_reference_table=True,                │
-│                │       │          │             │                │         │       │                │              │                │        │                              │ choices=['in_stock', 'low_stock',       │
-│                │       │          │             │                │         │       │                │              │                │        │                              │ 'out_of_stock', 'discontinued'],        │
-│                │       │          │             │                │         │       │                │              │                │        │                              │ description=Current product             │
-│                │       │          │             │                │         │       │                │              │                │        │                              │ availability status                     │
-│ categories     │ list  │ False    │ False       │ category       │ True    │ False │                │ False        │                │ True   │ product_category_association │ is_many_to_many=True,                   │
-│                │       │          │             │                │         │       │                │              │                │        │                              │ description=Product categories          │
-│ specifications │ dict  │ False    │ False       │ specifications │ False   │ True  │ specifications │ False        │                │ False  │                              │                                         │
-└────────────────┴───────┴──────────┴─────────────┴────────────────┴─────────┴───────┴────────────────┴──────────────┴────────────────┴────────┴──────────────────────────────┴─────────────────────────────────────────┘
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Field             ┃ Type  ┃ Nullable ┃ Primary Key ┃ Relationship   ┃ Is List ┃ Is FK ┃ FK To          ┃ Is Ref Table ┃ Ref Table Name ┃ Is M2M ┃ Assoc Table                  ┃ Metadata                             ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ id                │ int   │ False    │ True        │                │ False   │ False │                │ False        │                │ False  │                              │ primary_key=True                     │
+│ name              │ str   │ False    │ False       │                │ False   │ False │                │ False        │                │ False  │                              │                                      │
+│ sku               │ str   │ False    │ False       │                │ False   │ False │                │ False        │                │ False  │                              │                                      │
+│ price             │ float │ False    │ False       │                │ False   │ False │                │ False        │                │ False  │                              │                                      │
+│ status            │ str   │ False    │ False       │                │ False   │ False │                │ True         │ status_ref     │ False  │                              │ is_reference_table=True,             │
+│                   │       │          │             │                │         │       │                │              │                │        │                              │ choices=['in_stock', 'low_stock',    │
+│                   │       │          │             │                │         │       │                │              │                │        │                              │ 'out_of_stock', 'discontinued'],     │
+│                   │       │          │             │                │         │       │                │              │                │        │                              │ description=Current product          │
+│                   │       │          │             │                │         │       │                │              │                │        │                              │ availability status                  │
+│ categories        │ list  │ False    │ False       │ category       │ True    │ False │                │ False        │                │ True   │ product_category_association │ is_many_to_many=True,                │
+│                   │       │          │             │                │         │       │                │              │                │        │                              │ description=Product categories       │
+│ specifications_id │ int   │ False    │ False       │ specifications │ False   │ True  │ specifications │ False        │                │ False  │                              │                                      │
+└───────────────────┴───────┴──────────┴─────────────┴────────────────┴─────────┴───────┴────────────────┴──────────────┴────────────────┴────────┴──────────────────────────────┴──────────────────────────────────────┘
 
                                                                  Schema Structure: customer
 ┏━━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
@@ -280,18 +280,6 @@ Schema Visualization:
 │ price    │ float │ False    │ False       │              │ False   │ False │       │ False        │                │ False  │             │                  │
 └──────────┴───────┴──────────┴─────────────┴──────────────┴─────────┴───────┴───────┴──────────────┴────────────────┴────────┴─────────────┴──────────────────┘
 
-                                                              Schema Structure: shipping_address
-┏━━━━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
-┃ Field   ┃ Type ┃ Nullable ┃ Primary Key ┃ Relationship ┃ Is List ┃ Is FK ┃ FK To ┃ Is Ref Table ┃ Ref Table Name ┃ Is M2M ┃ Assoc Table ┃ Metadata         ┃
-┡━━━━━━━━━╇━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
-│ id      │ int  │ False    │ True        │              │ False   │ False │       │ False        │                │ False  │             │ primary_key=True │
-│ street  │ str  │ False    │ False       │              │ False   │ False │       │ False        │                │ False  │             │                  │
-│ city    │ str  │ False    │ False       │              │ False   │ False │       │ False        │                │ False  │             │                  │
-│ state   │ str  │ False    │ False       │              │ False   │ False │       │ False        │                │ False  │             │                  │
-│ zip     │ str  │ False    │ False       │              │ False   │ False │       │ False        │                │ False  │             │                  │
-│ country │ str  │ False    │ False       │              │ False   │ False │       │ False        │                │ False  │             │                  │
-└─────────┴──────┴──────────┴─────────────┴──────────────┴─────────┴───────┴───────┴──────────────┴────────────────┴────────┴─────────────┴──────────────────┘
-
                                                                   Schema Structure: payment
 ┏━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
 ┃ Field  ┃ Type  ┃ Nullable ┃ Primary Key ┃ Relationship ┃ Is List ┃ Is FK ┃ FK To ┃ Is Ref Table ┃ Ref Table Name ┃ Is M2M ┃ Assoc Table ┃ Metadata         ┃
@@ -303,19 +291,19 @@ Schema Visualization:
 └────────┴───────┴──────────┴─────────────┴──────────────┴─────────┴───────┴───────┴──────────────┴────────────────┴────────┴─────────────┴──────────────────┘
 
                                                                                                  Schema Structure: order
-┏━━━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Field            ┃ Type ┃ Nullable ┃ Primary Key ┃ Relationship     ┃ Is List ┃ Is FK ┃ FK To            ┃ Is Ref Table ┃ Ref Table Name ┃ Is M2M ┃ Assoc Table ┃ Metadata                                            ┃
-┡━━━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ id               │ int  │ False    │ True        │                  │ False   │ False │                  │ False        │                │ False  │             │ primary_key=True                                    │
-│ order_number     │ str  │ False    │ False       │                  │ False   │ False │                  │ False        │                │ False  │             │                                                     │
-│ status           │ str  │ False    │ False       │                  │ False   │ False │                  │ True         │ status_ref     │ False  │             │ is_reference_table=True, choices=['pending',        │
-│                  │      │          │             │                  │         │       │                  │              │                │        │             │ 'processing', 'shipped', 'delivered', 'cancelled'], │
-│                  │      │          │             │                  │         │       │                  │              │                │        │             │ description=Current order status                    │
-│ customer         │ dict │ False    │ False       │ customer         │ False   │ True  │ customer         │ False        │                │ False  │             │                                                     │
-│ items            │ list │ False    │ False       │ item             │ True    │ True  │ item             │ False        │                │ False  │             │                                                     │
-│ shipping_address │ dict │ False    │ False       │ shipping_address │ False   │ True  │ shipping_address │ False        │                │ False  │             │                                                     │
-│ payment          │ dict │ False    │ False       │ payment          │ False   │ True  │ payment          │ False        │                │ False  │             │                                                     │
-└──────────────────┴──────┴──────────┴─────────────┴──────────────────┴─────────┴───────┴──────────────────┴──────────────┴────────────────┴────────┴─────────────┴─────────────────────────────────────────────────────┘
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Field               ┃ Type ┃ Nullable ┃ Primary Key ┃ Relationship ┃ Is List ┃ Is FK ┃ FK To    ┃ Is Ref Table ┃ Ref Table Name ┃ Is M2M ┃ Assoc Table ┃ Metadata                                                     ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ id                  │ int  │ False    │ True        │              │ False   │ False │          │ False        │                │ False  │             │ primary_key=True                                             │
+│ order_number        │ str  │ False    │ False       │              │ False   │ False │          │ False        │                │ False  │             │                                                              │
+│ status              │ str  │ False    │ False       │              │ False   │ False │          │ True         │ status_ref     │ False  │             │ is_reference_table=True, choices=['pending', 'processing',   │
+│                     │      │          │             │              │         │       │          │              │                │        │             │ 'shipped', 'delivered', 'cancelled'], description=Current    │
+│                     │      │          │             │              │         │       │          │              │                │        │             │ order status                                                 │
+│ customer_id         │ int  │ False    │ False       │ customer     │ False   │ True  │ customer │ False        │                │ False  │             │                                                              │
+│ items               │ list │ False    │ False       │ item         │ True    │ True  │ item     │ False        │                │ False  │             │                                                              │
+│ shipping_address_id │ int  │ False    │ False       │ address      │ False   │ True  │ address  │ False        │                │ False  │             │ description=Order shipping address, entity_type=address      │
+│ payment_id          │ int  │ False    │ False       │ payment      │ False   │ True  │ payment  │ False        │                │ False  │             │                                                              │
+└─────────────────────┴──────┴──────────┴─────────────┴──────────────┴─────────┴───────┴──────────┴──────────────┴────────────────┴────────┴─────────────┴──────────────────────────────────────────────────────────────┘
 
                                                                                                  Schema Structure: store
 ┏━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -326,7 +314,7 @@ Schema Visualization:
 │ website     │ str  │ False    │ False       │              │ False   │ False │            │ False        │                │ False  │             │                                                                    │
 │ status      │ str  │ False    │ False       │              │ False   │ False │            │ True         │ status_ref     │ False  │             │ is_reference_table=True, choices=['active', 'inactive',            │
 │             │      │          │             │              │         │       │            │              │                │        │             │ 'maintenance'], description=Current store status                   │
-│ address     │ dict │ False    │ False       │ address      │ False   │ True  │ address    │ False        │                │ False  │             │ description=Store's physical address                               │
+│ address_id  │ int  │ False    │ False       │ address      │ False   │ True  │ address    │ False        │                │ False  │             │ description=Store's physical address, entity_type=address          │
 │ departments │ list │ False    │ False       │ department   │ True    │ True  │ department │ False        │                │ False  │             │                                                                    │
 │ products    │ list │ False    │ False       │ product      │ True    │ True  │ product    │ False        │                │ False  │             │                                                                    │
 │ orders      │ list │ False    │ False       │ order        │ True    │ True  │ order      │ False        │                │ False  │             │                                                                    │
@@ -365,21 +353,6 @@ Example Usage:
         "name": "TechGadgets",
         "status": "active",
         "address": {
-        "status": "active",
-        "status": "active",
-        "address": {
-            "street": "123 Tech Street",
-            "city": "Silicon Valley"
-        }
-    }
-    store_model = StoreModel(**store_data)
-
-    # Enable debug logging:
-    import logging
-    logging.getLogger('pyflattendb').setLevel(logging.DEBUG)
-
-        "status": "active",
-        "address": {
             "street": "123 Tech Street",
             "city": "Silicon Valley"
         }
@@ -397,7 +370,7 @@ Example Usage:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/pyflattendb.git
+git clone https://github.com/random-things/pyflattendb.git
 cd pyflattendb
 ```
 

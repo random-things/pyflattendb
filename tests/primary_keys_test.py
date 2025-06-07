@@ -153,7 +153,7 @@ def test_foreign_key_set_null() -> None:
     fks = table_info["foreign_keys"]
 
     # Verify SET NULL for the address foreign key
-    assert len(fks) == 1
+    assert len(fks) == 2
     assert fks[0]["options"].get("ondelete") == "SET NULL"
 
 

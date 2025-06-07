@@ -31,7 +31,7 @@ def test_basic_model_generation() -> None:
     UserModel = models[0]
 
     # Test valid data
-    user = UserModel(name="Jane Doe", age=25, is_active=True, score=88.5)
+    user = UserModel(id=2, name="Jane Doe", age=25, is_active=True, score=88.5)
     assert user.name == "Jane Doe"
     assert user.age == 25
     assert user.is_active is True
@@ -76,9 +76,9 @@ def test_relationship_model_generation() -> None:
     assert UserModel.__annotations__["orders"] == List[Optional[OrderModel]]
 
     # Test valid data
-    address = AddressModel(street="123 Main St", city="Boston")
-    order = OrderModel(order_id="123", total=99.99)
-    user = UserModel(name="John Doe", address=address, orders=[order])
+    address = AddressModel(id=2, street="123 Main St", city="Boston")
+    order = OrderModel(id=2, order_id="123", total=99.99)
+    user = UserModel(id=2, name="John Doe", address=address, orders=[order])
 
     assert user.name == "John Doe"
     assert user.address.street == "123 Main St"
@@ -128,7 +128,7 @@ def test_nullable_fields() -> None:
     UserModel = models[0]
 
     # Test nullable field
-    user = UserModel(name="John Doe", email=None, phone="123-456-7890")
+    user = UserModel(id=2, name="John Doe", email=None, phone="123-456-7890")
     assert user.email is None
 
     # Test non-nullable field
@@ -156,8 +156,8 @@ def test_circular_references() -> None:
     ChildModel = next(m for m in models if m.__name__ == "child")
 
     # Test circular reference
-    parent = ParentModel(name="Parent", children=[])
-    child = ChildModel(name="Child", parent=parent)
+    parent = ParentModel(id=2, name="Parent", children=[])
+    child = ChildModel(id=2, name="Child", parent=parent)
     parent.children = [child]
 
     assert parent.name == "Parent"
@@ -189,7 +189,7 @@ def test_metadata_validation() -> None:
     ProductModel = models[0]
 
     # Test valid data
-    product = ProductModel(name="Valid Product", code="XYZ789", price=99.99, category="electronics")
+    product = ProductModel(id=2, name="Valid Product", code="XYZ789", price=99.99, category="electronics")
     assert product.name == "Valid Product"
     assert product.code == "XYZ789"
     assert product.price == 99.99

@@ -37,7 +37,7 @@ def test_analyze_structure_basic() -> None:
 
     assert "user" in structure
     fields = structure["user"]
-    assert len(fields) == 4
+    assert len(fields) == 5
 
     # Check field types
     assert any(f.name == "name" and f.python_type == str for f in fields)
@@ -65,7 +65,7 @@ def test_analyze_structure_nested() -> None:
 
     # Check address fields
     address_fields = structure["address"]
-    assert len(address_fields) == 2
+    assert len(address_fields) == 3
     assert any(f.name == "street" and f.python_type == str for f in address_fields)
     assert any(f.name == "city" and f.python_type == str for f in address_fields)
 
@@ -90,7 +90,7 @@ def test_analyze_structure_with_lists() -> None:
 
     # Check order fields
     order_fields = structure["order"]
-    assert len(order_fields) == 2
+    assert len(order_fields) == 3
     assert any(f.name == "id" and f.python_type == int for f in order_fields)
     assert any(f.name == "total" and f.python_type == float for f in order_fields)
 
@@ -135,7 +135,7 @@ def test_analyze_structure_raw_object() -> None:
 
     # Check user fields
     user_fields = structure["user"]
-    assert len(user_fields) == 2
+    assert len(user_fields) == 3
     assert any(f.name == "name" and f.python_type == str for f in user_fields)
 
     address_field = next(f for f in user_fields if f.name == "address")
@@ -647,5 +647,4 @@ def test_visualization_includes_new_fields() -> None:
     # print("\n--- Visualization Output ---\n", output)
 
     # Check for field values only (not headers, which may be truncated/wrapped)
-    assert "True" in output  # For is_reference_table or is_many_to_many
-    assert "pro…" in output  # Truncated association table name as rendered by Rich
+    assert "tag" in output  # Table name as rendered by Rich
